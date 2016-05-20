@@ -1,0 +1,18 @@
+paths:
+
+  version:
+    pattern: 'v{version:\d\{3\}}'
+  filename:
+    pattern: '{name}.{task_name}.{@version}.{filetype}'
+
+  asset_root:
+    pattern: '{root}/library/{asset_type}/{asset_name}'
+  asset_work:
+    pattern: '{@asset_root}/{task_name}/{@filename}'
+  asset_publish:
+    pattern: '{@asset_root}/{task_name}/publish/{@filename}'
+
+  task_work:
+    pattern: '{root}/{task_name}/{@filename}'
+  task_publish:
+    pattern: '{root}/{task_name}/publish/{@filename}'

@@ -1,10 +1,10 @@
 import os
 
 import lucidity
-import ftrack
 
 
 def get_ftrack_data(entityId):
+    import ftrack
 
     entity = None
     try:
@@ -41,27 +41,29 @@ def get_ftrack_data(entityId):
 
     # if its an asset
     if asset_build:
-        print asset_build
         data['asset_type'] = asset_build.getType().getName().lower()
         data['asset_name'] = asset_build.getName().lower()
         data['root'] = project.getRoot()
 
-    # non ftrack data
-    data['version'] = str(1).zfill(3)
-    data['filetype'] = 'scn'
-
     return data
 
 
-def get_path(path_type, data):
+def get_path(path_type, data, version, extension):
     schema_path = os.path.join(os.path.dirname(__file__), 'schema.yml')
     schema = lucidity.Schema.from_yaml(schema_path)
+
+    # non ftrack data
+    data['version'] = version
+    data['filetype'] = extension
 
     paths = {}
     for fm in schema.format_all(data):
         paths[fm[1].name] = fm[0]
 
-    return paths[path_type]
+    return paths[path_type].replace('\\', '/')
 
-data = get_ftrack_data('c1823cac-3057-11e5-8cd9-040112b6a801')
-print get_path('task_publish', data)
+if __name__ == "__main__":
+    data = get_ftrack_data('06499796-1e77-11e6-a1d5-42010af00048')
+    version = str(1).zfill(3)
+    extension = 'scn'
+    print get_path('task_work', data, version, extension)

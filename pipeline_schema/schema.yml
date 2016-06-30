@@ -1,18 +1,49 @@
 paths:
 
+  # global version string
+  # only 3 digit string accepted
   version:
     pattern: 'v{version:\d\{3\}}'
-  filename:
-    pattern: '{name}.{task_name}.{@version}.{filetype}'
+  # global frame padding
+  frame_padding:
+    pattern: '%04d'
 
-  asset_root:
-    pattern: '{root}/library/{asset_type}/{asset_name}'
-  asset_work:
-    pattern: '{@asset_root}/{task_name}/{@filename}'
-  asset_publish:
-    pattern: '{@asset_root}/{task_name}/publish/{@filename}'
+  # temporary publish file
+  temp_dir:
+    pattern: '{user_directory}/temporary_pipeline_directory'
+  temp_file:
+    pattern: '{@temp_dir}/{uuid}.{extension}'
 
+  # working task file
+  # global file name
+  # name: "q007c006"
+  # task_name: "compositing"
+  # extension: "nk"
+  # q007c006.compositing.v001.nk
+  task_file_name:
+    pattern: '{name}.{task_name}.{@version}.{extension}'
+  # project_root: "L:/ethel_and_ernest_0001"
+  # parent_type: "sequences"
+  # parent_path: "q007/q007c006"
+  # task_name: "compositing"
+  # L:/ethel_and_ernest_0001/sequences/q007/q007c006/compositing/q007c006.compositing.v001.nk
   task_work:
-    pattern: '{root}/{task_name}/{@filename}'
+    pattern: '{project_root}/{parent_types}/{parent_path}/{task_name}/{@task_file_name}'
+  # publish task file
+  # L:/ethel_and_ernest_0001/sequences/q007/q007c006/compositing/publish/q007c006.compositing.v001.nk
   task_publish:
-    pattern: '{root}/{task_name}/publish/{@filename}'
+    pattern: '{project_root}/{parent_types}/{parent_path}/{task_name}/publish/{@task_file_name}'
+
+  # output files
+  # project_root: "m:/renders"
+  # output_type: "audio"
+  # parent_path: "tog_ep003_sploshydropper/shot_name"
+  # task_name: "animation"
+  # name: "main"
+  # extension: "wav"
+  # m:/renders/audio/tog_ep003_sploshydropper/shot_name/animation/v001/main.v001.wav
+  output_file:
+    pattern: '{project_root}/renders/{output_type}/{parent_path}/{task_name}/{@version}/{name}.{@version}.{extension}'
+  # m:/renders/mov/tog_ep003_sploshydropper/shot_name/animation/v001/main/main.v001.%04d.png
+  output_sequence:
+    pattern: '{project_root}/renders/{output_type}/{parent_path}/{task_name}/{@version}/{name}/{name}.{@version}.{@frame_padding}.{extension}'

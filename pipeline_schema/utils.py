@@ -82,6 +82,10 @@ def get_ftrack_data(entityId):
             data['asset_type'] = asset_build.getType().getName()
             data['asset_name'] = asset_build.getName()
             data['root'] = project.getRoot()
+            data['parent_types'] = ''
+            data['parent_path'] = os.path.join('library',
+                                               asset_build.getType().getName(),
+                                               asset_build.getName())
 
     # getting component data
     if entity.get('entityType') == 'component':

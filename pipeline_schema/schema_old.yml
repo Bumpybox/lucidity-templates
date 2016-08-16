@@ -43,7 +43,7 @@ paths:
   # extension: "wav"
   # m:/renders/audio/tog_ep003_sploshydropper/shot_name/animation/v001/main.v001.wav
   output_file:
-    pattern: '{project_root}/output/{output_type}/{parent_path}/{task_name}/{@version}/{name}.{@version}.{extension}'
+    pattern: '{project_root}/renders/{output_type}/{parent_path}/{task_name}/{@version}/{name}.{@version}.{extension}'
   # m:/renders/mov/tog_ep003_sploshydropper/shot_name/animation/v001/main/main.v001.%04d.png
   output_sequence:
-    pattern: '{project_root}/output/{output_type}/{parent_path}/{task_name}/{@version}/{name}/{name}.{@version}.{@frame_padding}.{extension}'
+    pattern: '{project_root}/renders/{output_type}/{parent_path}/{task_name}/{@version}/{name}/{name}.{@version}.{@frame_padding}.{extension}'
